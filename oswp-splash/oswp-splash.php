@@ -14,7 +14,7 @@
  * Plugin Name:       oswp-splash
  * Plugin URI:        https://github.com/BigManzai/oswp
  * Description:       Splash Show information about the OpenSimulator. Please activate in the widget area and enter the MySQL data. You can create an extra page in WordPress and name this splash. Then enter this link to the Splash page in the Grid.ini under welcome = your-splash-site.com.
- * Version:           1.1.2
+ * Version:           1.1.4
  * Author:            Manfred Aabye
  * Author URI:        http://openmanniland.de
  * Text Domain:       oswp-splash
