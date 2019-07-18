@@ -2,7 +2,7 @@
 
 Splash Informationen.
 
-### Upgrade
+### Upgrade 1.1.4
 
 Einfach über das Alte kopieren.
 
