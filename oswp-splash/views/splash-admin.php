@@ -9,6 +9,8 @@
 // Gettext einfügen
 /* Make theme available for translation */
 	load_plugin_textdomain( 'oswp-splash', false, basename( dirname( __FILE__ ) ) . '/lang' );
+	
+	$CONF_db_server = "127.0.0.1";
  ?>
  
 <!-- Start Abfrage Nutzer -->
@@ -84,7 +86,7 @@
 	<div class="row section">	
     <p><label for="base" class="label control-label"><i class="dashicons dashicons-book" style="font-size:20px"></i><?php echo esc_html__( '  MySQL Server IP:', 'oswp-splash' ) ; ?></b></label></p>
         <div class="row">
-            <p><input class="input border" type="text" placeholder="127.0.0.1" name="CONF_db_server"/></p>
+            <p><input class="input border" type="text" value="127.0.0.1" name="CONF_db_server"/></p>
         </div>
     </div>
  
@@ -120,9 +122,24 @@
 
 		$CONF_os_name  = $_POST['CONF_os_name']; //variable name, string value use: %s
 		$CONF_db_server  = $_POST['CONF_db_server']; //server http or IP, string value use: %s
-		$CONF_db_user  = $_POST['CONF_db_user']; //database user name, string value use: %s
+		
+/* 		$CONF_db_user  = $_POST['CONF_db_user']; //database user name, string value use: %s
 		$CONF_db_pass  = $_POST['CONF_db_pass']; //database password, string value use: %s
-		$CONF_db_database  = $_POST['CONF_db_database']; //database name, string value use: %s
+		$CONF_db_database  = $_POST['CONF_db_database']; //database name, string value use: %s */
+		
+//Neu mit einer einfachen Verschlüsselngsmethode
+		$CONF_db_user_crypt  = $_POST['CONF_db_user']; //database user name, string value use: %s
+		$CONF_db_pass_crypt  = $_POST['CONF_db_pass']; //database password, string value use: %s
+		$CONF_db_database_crypt  = $_POST['CONF_db_database']; //database name, string value use: %s
+		
+		//Einfache Verschlüsselngsmethode
+		include("splash.class.php");
+		$blowfish = new splashBlowfish("UKqZCnC7fyjN3PJ7YS73ETt9");
+		
+		$CONF_db_user 		= $blowfish->Encrypt( $CONF_db_user_crypt );
+		$CONF_db_pass 		= $blowfish->Encrypt( $CONF_db_pass_crypt );
+		$CONF_db_database 	= $blowfish->Encrypt( $CONF_db_database_crypt );
+//Neu mit einer einfachen Verschlüsselngsmethode		
 		
 		$CONF_os_totalUsers  = $_POST['CONF_os_totalUsers'];
 		$CONF_os_activeUsers  = $_POST['CONF_os_activeUsers'];

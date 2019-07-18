@@ -8,10 +8,29 @@
 	
 	// Auslesen der wp datenbank
 	$CONF_db_serveross = $wpdb->get_var( "SELECT CONF_db_server FROM $tablename" );
-	$CONF_db_useross = $wpdb->get_var( "SELECT CONF_db_user FROM $tablename" );
+	
+/* 	$CONF_db_useross = $wpdb->get_var( "SELECT CONF_db_user FROM $tablename" );	
 	$CONF_db_passoss = $wpdb->get_var( "SELECT CONF_db_pass FROM $tablename" );
-	$CONF_db_databaseoss = $wpdb->get_var( "SELECT CONF_db_database FROM $tablename" );
+	$CONF_db_databaseoss = $wpdb->get_var( "SELECT CONF_db_database FROM $tablename" ); */
+	
 	$CONF_os_nameoss = $wpdb->get_var( "SELECT CONF_os_name FROM $tablename" );
+	
+//Neu mit einer einfachen Entschlüsselngsmethode	
+	$CONF_db_user_crypt = $wpdb->get_var( "SELECT CONF_db_user FROM $tablename" );
+	$CONF_db_pass_crypt = $wpdb->get_var( "SELECT CONF_db_pass FROM $tablename" );
+	$CONF_db_database_crypt = $wpdb->get_var( "SELECT CONF_db_database FROM $tablename" );
+	
+	//Einfache Entschlüsselngsmethode
+	include("splash.class.php");
+	$blowfish = new splashBlowfish("UKqZCnC7fyjN3PJ7YS73ETt9");
+	
+	$CONF_db_user_ut 		= $blowfish->Decrypt( $CONF_db_user_crypt );
+	$CONF_db_useross = trim($CONF_db_user_ut);
+	$CONF_db_pass_ut 		= $blowfish->Decrypt( $CONF_db_pass_crypt );
+	$CONF_db_passoss = trim($CONF_db_pass_ut);
+	$CONF_db_database_ut 	= $blowfish->Decrypt( $CONF_db_database_crypt );
+	$CONF_db_databaseoss = trim($CONF_db_database_ut);
+//Neu mit einer einfachen Entschlüsselngsmethode
 	
 	$CONF_os_totalUsersos = $wpdb->get_var( "SELECT CONF_os_totalUsers FROM $tablename" );
 	$CONF_os_activeUsersos = $wpdb->get_var( "SELECT CONF_os_activeUsers FROM $tablename" );
