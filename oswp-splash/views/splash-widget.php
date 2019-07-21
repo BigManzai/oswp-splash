@@ -96,14 +96,14 @@ if ($CONF_os_totalRegionsos == on){ echo esc_html__( 'Total regions : ', 'oswp-s
 if ($CONF_os_regionsergebnisos == on){ echo esc_html__( 'Regions in m² : ', 'oswp-splash' ). $regionsergebnis ."<br>"; }else{	echo ""; } 
 
 // Online? Offline?
-$check = $wpdb->get_var( "SELECT * FROM regions LIMIT 0,1" );
+$check = mysqli_query($con,"SELECT * FROM regions LIMIT 0,1" );
 	if ($check){
 	// Keine Region vorhanden.
-		echo "<h1><font color=#AA0000>".esc_html__( 'Grid is OFFLINE', 'oswp-splash' )."</font></h1></b><br>";
-	}else{
-	// Regionen sind da.
 		echo "<h1><font color=#00AA00>".esc_html__( 'Grid is ONLINE', 'oswp-splash' )."</font></h1></b><br>";
-	} 
+	}else{
+	// Regionen sind da.		
+		echo "<h1><font color=#AA0000>".esc_html__( 'Grid is OFFLINE', 'oswp-splash' )."</font></h1></b><br>";
+	}
 	
 // Alles schliessen
 	mysqli_close($con);
