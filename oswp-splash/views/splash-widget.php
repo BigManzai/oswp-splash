@@ -42,6 +42,7 @@
 	$CONF_os_totalGridAccountsos = $wpdb->get_var( "SELECT CONF_os_totalGridAccounts FROM $tablename" );
 	$CONF_os_totalAccountsos = $wpdb->get_var( "SELECT CONF_os_totalAccounts FROM $tablename" );
 	$CONF_os_friendsos = $wpdb->get_var( "SELECT CONF_os_friends FROM $tablename" );
+	
 	$CONF_os_groupsos = $wpdb->get_var( "SELECT CONF_os_groups FROM $tablename" );
 	$CONF_os_normalregionsos = $wpdb->get_var( "SELECT CONF_os_normalregions FROM $tablename" );
 	$CONF_os_varregionsos = $wpdb->get_var( "SELECT CONF_os_varregions FROM $tablename" );
@@ -66,6 +67,8 @@ list($activeUsers) = mysqli_fetch_row($resultoss4);
 
 $resultoss5 = mysqli_query($con,"SELECT COUNT(*) FROM GridUser") or die("Error: " . mysqli_error($con));
 list($totalGridAccounts) = mysqli_fetch_row($resultoss5);
+
+
 // NEU
 $resultoss6 = mysqli_query($con," SELECT COUNT(*) FROM regions WHERE sizeX = 256 AND sizeY = 256") or die("Error: " . mysqli_error($con));
 list($normalregions) = mysqli_fetch_row($resultoss6);
@@ -89,16 +92,18 @@ list($groups) = mysqli_fetch_row($resultoss10);
 
 // Display the results
 echo "<h1>$CONF_os_nameoss</h1>";
-if ($CONF_os_totalUsersos == on){ echo esc_html__( 'Users in the grid : ', 'oswp-splash' ). $totalUsers ."<br>"; }else{	echo ""; }
-if ($CONF_os_activeUsersos == on){ echo esc_html__( 'Active in the last 30 days : ', 'oswp-splash' ). $activeUsers ."<br>"; }else{	echo ""; } 
-if ($CONF_os_totalGridAccountsos == on){ echo esc_html__( 'Hypergrid users : ', 'oswp-splash' ). $totalGridAccounts ."<br>"; }else{	echo ""; } 
-if ($CONF_os_totalAccountsos == on){ echo esc_html__( 'Registrations : ', 'oswp-splash' ). $totalAccounts ."<br>"; }else{	echo ""; } 
-if ($CONF_os_friendsos == on){ echo esc_html__( 'Active friendships : ', 'oswp-splash' ). $friends ."<br>"; }else{	echo ""; } 
-if ($CONF_os_groupsos == on){ echo esc_html__( 'Active groups : ', 'oswp-splash' ). $groups ."<br>"; }else{	echo ""; } 
-if ($CONF_os_normalregionsos == on){ echo esc_html__( 'Normal regions : ', 'oswp-splash' ). $normalregions ."<br>"; }else{	echo ""; } 
-if ($CONF_os_varregionsos == on){ echo esc_html__( 'Var regions : ', 'oswp-splash' ). $varregions ."<br>"; }else{	echo ""; } 
-if ($CONF_os_totalRegionsos == on){ echo esc_html__( 'Total regions : ', 'oswp-splash' ). $totalRegions ."<br>"; }else{	echo ""; } 
-if ($CONF_os_regionsergebnisos == on){ echo esc_html__( 'Regions in m² : ', 'oswp-splash' ). $regionsergebnis ."<br>"; }else{	echo ""; } 
+// Hochstrich bei on angebracht testen ob die Einstellungen noch gehen.
+if ($CONF_os_totalUsersos ==  'on' ){ echo esc_html__( 'Users in the grid : ', 'oswp-splash' ). $totalUsers ."<br>"; }else{	echo ""; }
+if ($CONF_os_activeUsersos ==  'on' ){ echo esc_html__( 'Active in the last 30 days : ', 'oswp-splash' ). $activeUsers ."<br>"; }else{	echo ""; } 
+if ($CONF_os_totalGridAccountsos ==  'on' ){ echo esc_html__( 'Hypergrid users : ', 'oswp-splash' ). $totalGridAccounts ."<br>"; }else{	echo ""; } 
+if ($CONF_os_totalAccountsos ==  'on' ){ echo esc_html__( 'Registrations : ', 'oswp-splash' ). $totalAccounts ."<br>"; }else{	echo ""; } 
+if ($CONF_os_friendsos ==  'on' ){ echo esc_html__( 'Active friendships : ', 'oswp-splash' ). $friends ."<br>"; }else{	echo ""; } 
+
+if ($CONF_os_groupsos ==  'on' ){ echo esc_html__( 'Active groups : ', 'oswp-splash' ). $groups ."<br>"; }else{	echo ""; } 
+if ($CONF_os_normalregionsos ==  'on' ){ echo esc_html__( 'Normal regions : ', 'oswp-splash' ). $normalregions ."<br>"; }else{	echo ""; } 
+if ($CONF_os_varregionsos ==  'on' ){ echo esc_html__( 'Var regions : ', 'oswp-splash' ). $varregions ."<br>"; }else{	echo ""; } 
+if ($CONF_os_totalRegionsos ==  'on' ){ echo esc_html__( 'Total regions : ', 'oswp-splash' ). $totalRegions ."<br>"; }else{	echo ""; } 
+if ($CONF_os_regionsergebnisos ==  'on' ){ echo esc_html__( 'Regions in m² : ', 'oswp-splash' ). $regionsergebnis ."<br>"; }else{	echo ""; } 
 
 // Online? Offline?
 $check = mysqli_query($con,"SELECT * FROM regions LIMIT 0,1" );
