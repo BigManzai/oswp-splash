@@ -12,9 +12,9 @@
  *
  * @wordpress-plugin
  * Plugin Name:       oswp-splash
- * Plugin URI:        https://github.com/BigManzai/oswp
+ * Plugin URI:        https://github.com/BigManzai/oswp-splash
  * Description:       Splash Show information about the OpenSimulator. Please activate in the widget area and enter the MySQL data. You can create an extra page in WordPress and name this splash. Then enter this link to the Splash page in the Grid.ini under welcome = your-splash-site.com.
- * Version:           1.1.4
+ * Version:           1.2.0
  * Author:            Manfred Aabye
  * Author URI:        http://openmanniland.de
  * Text Domain:       oswp-splash
@@ -29,15 +29,10 @@ if ( ! defined ( 'ABSPATH' ) ) {
 	exit;
 }
 
-// Force WP to load our translation files.
-$wpterm_locale = array( 'de_DE' );
-$this_locale = get_locale();
-if ( in_array( $this_locale, $wpterm_locale ) ) {
-	if ( file_exists( __DIR__ . "/lang/oswp-splash-{$this_locale}.mo" ) ) {
-		unload_textdomain( 'oswp-splash' );
-		load_textdomain( 'oswp-splash', __DIR__ . "/lang/oswp-splash-{$this_locale}.mo" );
-	}
-}
+/**
+ * Gettext.
+ */
+load_plugin_textdomain( 'oswp-regionsliste', false, basename( dirname( __FILE__ ) ) . '/lang' );
 
 // TODO: change 'oswp_splash' to the name of your plugin
 class oswp_splash extends WP_Widget {
