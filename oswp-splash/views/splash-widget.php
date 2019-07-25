@@ -20,9 +20,14 @@
 	$CONF_db_pass_crypt = $wpdb->get_var( "SELECT CONF_db_pass FROM $tablename" );
 	$CONF_db_database_crypt = $wpdb->get_var( "SELECT CONF_db_database FROM $tablename" );
 	
-	//Einfache Entschlüsselngsmethode
-	include("splash.class.php");
-	$blowfish = new splashBlowfish("UKqZCnC7fyjN3PJ7YS73ETt9");
+	// Schauen ob blowfish.class.php schon geladen ist.
+	if (class_exists('Blowfish')) {
+		echo""; // blowfish.class.php ist schon geladen.
+	} else {
+		include("blowfish.class.php");// blowfish.class.php nachladen.
+	}
+	
+	$blowfish = new Blowfish("UKqZCnC7fyjN3PJ7YS73ETt9");
 	
 	$CONF_db_user_ut 		= $blowfish->Decrypt( $CONF_db_user_crypt );
 	$CONF_db_useross = trim($CONF_db_user_ut);
@@ -98,12 +103,12 @@ if ($CONF_os_regionsergebnisos == on){ echo esc_html__( 'Regions in m² : ', 'os
 // Online? Offline?
 $check = mysqli_query($con,"SELECT * FROM regions LIMIT 0,1" );
 	if ($check){
-	// Region vorhanden.
+	// Keine Region vorhanden.
 		echo "<h1><font color=#00AA00>".esc_html__( 'Grid is ONLINE', 'oswp-splash' )."</font></h1></b><br>";
 	}else{
-	// Keine Region vorhanden.		
+	// Regionen sind da.		
 		echo "<h1><font color=#AA0000>".esc_html__( 'Grid is OFFLINE', 'oswp-splash' )."</font></h1></b><br>";
-	}
+	} 
 	
 // Alles schliessen
 	mysqli_close($con);

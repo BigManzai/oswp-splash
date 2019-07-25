@@ -50,7 +50,7 @@
 
 	//S-Box0: 256*32 Bit
 	$sbox0 =  Array (
-      0xd1310ba6, 0x98dfb5ac, 0x2ffd72db, 0xd01adfb7, 0xb8e1afed, 0x6a267e96,
+    0xd1310ba6, 0x98dfb5ac, 0x2ffd72db, 0xd01adfb7, 0xb8e1afed, 0x6a267e96,
 	0xba7c9045, 0xf12c7f99, 0x24a19947, 0xb3916cf7, 0x0801f2e2, 0x858efc16,
 	0x636920d8, 0x71574e69, 0xa458fea3, 0xf4933d7e, 0x0d95748f, 0x728eb658,
 	0x718bcd58, 0x82154aee, 0x7b54a41d, 0xc25a59b5, 0x9c30d539, 0x2af26013,
@@ -96,7 +96,7 @@
 
    //S-Box1: 256*32 Bit
 	$sbox1 = Array (
-   0x4b7a70e9, 0xb5b32944, 0xdb75092e, 0xc4192623, 0xad6ea6b0, 0x49a7df7d,
+    0x4b7a70e9, 0xb5b32944, 0xdb75092e, 0xc4192623, 0xad6ea6b0, 0x49a7df7d,
 	0x9cee60b8, 0x8fedb266, 0xecaa8c71, 0x699a17ff, 0x5664526c, 0xc2b19ee1,
 	0x193602a5, 0x75094c29, 0xa0591340, 0xe4183a3e, 0x3f54989a, 0x5b429d65,
 	0x6b8fe4d6, 0x99f73fd6, 0xa1d29c07, 0xefe830f5, 0x4d2d38e6, 0xf0255dc1,
@@ -142,7 +142,7 @@
 
    //S-Box2: 256*32 Bit
 	$sbox2 = Array (
-   0xe93d5a68, 0x948140f7, 0xf64c261c, 0x94692934, 0x411520f7, 0x7602d4f7,
+    0xe93d5a68, 0x948140f7, 0xf64c261c, 0x94692934, 0x411520f7, 0x7602d4f7,
 	0xbcf46b2e, 0xd4a20068, 0xd4082471, 0x3320f46a, 0x43b7d4b7, 0x500061af,
 	0x1e39f62e, 0x97244546, 0x14214f74, 0xbf8b8840, 0x4d95fc1d, 0x96b591af,
 	0x70f4ddd3, 0x66a02f45, 0xbfbc09ec, 0x03bd9785, 0x7fac6dd0, 0x31cb8504,
@@ -188,7 +188,7 @@
 
    //S-Box3: 256*32 Bit
 	$sbox3 = Array (
-   0x3a39ce37, 0xd3faf5cf, 0xabc27737, 0x5ac52d1b, 0x5cb0679e, 0x4fa33742,
+    0x3a39ce37, 0xd3faf5cf, 0xabc27737, 0x5ac52d1b, 0x5cb0679e, 0x4fa33742,
 	0xd3822740, 0x99bc9bbe, 0xd5118e9d, 0xbf0f7315, 0xd62d1c7e, 0xc700c47b,
 	0xb78c1b6b, 0x21a19045, 0xb26eb1be, 0x6a366eb4, 0x5748ab2f, 0xbc946e79,
 	0xc6a376d2, 0x6549c2c8, 0x530ff8ee, 0x468dde7d, 0xd5730a1d, 0x4cd04dc6,
@@ -238,7 +238,7 @@ class splashBlowfish
 {
    var $pbox, $sbox0, $sbox1, $sbox2, $sbox3;
 
-   function splashBlowfish($key) {
+   function __construct($key) {
       $this->KeySetup($key);
    }
 
@@ -301,8 +301,8 @@ class splashBlowfish
       }
 
       for($i = 0; $i<count($plain); $i++) {
-         $output .= $this->_long2str($plain[$i][0]);
-         $output .= $this->_long2str($plain[$i][1]);
+         $output .= $this->_long2str($plain[$i][0]); // Notice: Undefined variable: output
+         $output .= $this->_long2str($plain[$i][1]); // Notice: Undefined variable: output
       }
 
       return $output;
@@ -333,8 +333,10 @@ class splashBlowfish
       $v[0] = 0x00000000;
       $v[1] = 0x00000000;
 
-      //P-Box durch verschluesselte Nullbit Bloecke ersetzen. In der niechsten Runde das Resultat erneut verschluesseln
+      //P-Box durch verschluesselte Nullbit Bloecke ersetzen. 
+	  //In der niechsten Runde das Resultat erneut verschluesseln
       //Encrypt Nullbit Blocks and replace the Pbox with the Chiffre. Next round, encrypt the result
+	  //Warning: count(): Parameter must be an array or an object that implements Countable.
       for($i=0;$i<count($pbox);$i+=2) {
          $v = $this->block_encrypt($v[0],$v[1]);
          $this->pbox[$i] = $v[0];
@@ -343,6 +345,7 @@ class splashBlowfish
 
       //S-Box [0 bis 3] durch verschloesselte Bloecke ersetzen
       //Replace S-Box [0 to 3] entries with encrypted blocks
+	  //Warning: count(): Parameter must be an array or an object that implements Countable.
       for($i=0;$i<count($sbox0);$i+=2) {
          $v = $this->block_encrypt($v[0],$v[1]);
          $this->sbox0[$i] = $v[0];
@@ -350,6 +353,7 @@ class splashBlowfish
       }
 
       //S-Box1
+	  //Warning: count(): Parameter must be an array or an object that implements Countable.
       for($i=0;$i<count($sbox1);$i+=2) {
          $v = $this->block_encrypt($v[0],$v[1]);
          $this->sbox1[$i] = $v[0];
@@ -357,6 +361,7 @@ class splashBlowfish
       }
 
       //S-Box2
+	  //Warning: count(): Parameter must be an array or an object that implements Countable.
       for($i=0;$i<count($sbox2);$i+=2) {
          $v = $this->block_encrypt($v[0],$v[1]);
          $this->sbox2[$i] = $v[0];
@@ -364,6 +369,7 @@ class splashBlowfish
       }
 
       //S-Box3
+	  //Warning: count(): Parameter must be an array or an object that implements Countable.
       for($i=0;$i<count($sbox3);$i+=2) {
          $v = $this->block_encrypt($v[0],$v[1]);
          $this->sbox3[$i] = $v[0];

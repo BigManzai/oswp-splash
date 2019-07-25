@@ -132,9 +132,14 @@
 		$CONF_db_pass_crypt  = $_POST['CONF_db_pass']; //database password, string value use: %s
 		$CONF_db_database_crypt  = $_POST['CONF_db_database']; //database name, string value use: %s
 		
-		//Einfache Verschlüsselngsmethode
-		include("splash.class.php");
-		$blowfish = new splashBlowfish("UKqZCnC7fyjN3PJ7YS73ETt9");
+		// Schauen ob blowfish.class.php schon geladen ist.
+		if (class_exists('Blowfish')) {
+			echo""; // blowfish.class.php ist schon geladen.
+		} else {
+			include("blowfish.class.php");// blowfish.class.php nachladen.
+		}
+		
+		$blowfish = new Blowfish("UKqZCnC7fyjN3PJ7YS73ETt9");
 		
 		$CONF_db_user 		= $blowfish->Encrypt( $CONF_db_user_crypt );
 		$CONF_db_pass 		= $blowfish->Encrypt( $CONF_db_pass_crypt );
