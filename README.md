@@ -1,4 +1,6 @@
-# oswp-splash
+# oswp-splash moved to oswp
+
+Bitte die endgültige Version aus dem Verzeichnis oswp Nutzen.
 
 Splash Informationen.
 
