@@ -4,15 +4,13 @@ Bitte die endgültige Version aus dem Verzeichnis oswp Nutzen.
 
 Splash Informationen.
 
-### Upgrade 1.2.0
+### Upgrade 1.2.2
 
-Einfach über das Alte kopieren.
-
-Danach Datenbankeinstellungen wiederholen, da diese Daten jetzt teilweise verschlüsselt sind.
+Die alte Version bitte vor dem kopieren löschen.
 
 ### Installation
 
-Entpacken und das Verzeichnis oswp-regionsliste in euer /wp-content/plugins kopieren.
+Entpacken und das Verzeichnis in euer /wp-content/plugins kopieren.
 
 Das Plugin im Plugins Bereich von Wordpress Aktivieren.
 
