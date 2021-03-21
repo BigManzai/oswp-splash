@@ -1,6 +1,6 @@
-# oswp-splash moved to oswp
+# oswp-splash
 
-Bitte die endgültige Version aus dem Verzeichnis oswp Nutzen.
+WordPress 5.7 Plugin. Zuletzt überprüft am 21. März 2021.
 
 Splash Informationen.
 
