@@ -7,15 +7,10 @@
 	$tablename = $wpdb->prefix . "ossplash";
 	
 	// Auslesen der wp datenbank
-	$CONF_db_serveross = $wpdb->get_var( "SELECT CONF_db_server FROM $tablename" );
+	$CONF_db_serversplash = $wpdb->get_var( "SELECT CONF_db_server FROM $tablename" );
 	
-/* 	$CONF_db_useross = $wpdb->get_var( "SELECT CONF_db_user FROM $tablename" );	
-	$CONF_db_passoss = $wpdb->get_var( "SELECT CONF_db_pass FROM $tablename" );
-	$CONF_db_databaseoss = $wpdb->get_var( "SELECT CONF_db_database FROM $tablename" ); */
+	$CONF_os_namesplash = $wpdb->get_var( "SELECT CONF_os_name FROM $tablename" );
 	
-	$CONF_os_nameoss = $wpdb->get_var( "SELECT CONF_os_name FROM $tablename" );
-	
-//Neu mit einer einfachen Entschlüsselngsmethode	
 	$CONF_db_user_crypt = $wpdb->get_var( "SELECT CONF_db_user FROM $tablename" );
 	$CONF_db_pass_crypt = $wpdb->get_var( "SELECT CONF_db_pass FROM $tablename" );
 	$CONF_db_database_crypt = $wpdb->get_var( "SELECT CONF_db_database FROM $tablename" );
@@ -30,14 +25,13 @@
 	$blowfish = new Blowfish("UKqZCnC7fyjN3PJ7YS73ETt9");
 	
 	$CONF_db_user_ut 		= $blowfish->Decrypt( $CONF_db_user_crypt );
-	$CONF_db_useross = trim($CONF_db_user_ut);
+	$CONF_db_usersplash = trim($CONF_db_user_ut);
 	$CONF_db_pass_ut 		= $blowfish->Decrypt( $CONF_db_pass_crypt );
-	$CONF_db_passoss = trim($CONF_db_pass_ut);
+	$CONF_db_passsplash = trim($CONF_db_pass_ut);
 	$CONF_db_database_ut 	= $blowfish->Decrypt( $CONF_db_database_crypt );
-	$CONF_db_databaseoss = trim($CONF_db_database_ut);
-//Neu mit einer einfachen Entschlüsselngsmethode
+	$CONF_db_databasesplash = trim($CONF_db_database_ut);
 	
-	$CONF_os_totalUsersos = $wpdb->get_var( "SELECT CONF_os_totalUsers FROM $tablename" );
+	$CONF_os_totalUserssplash = $wpdb->get_var( "SELECT CONF_os_totalUsers FROM $tablename" );
 	$CONF_os_activeUsersos = $wpdb->get_var( "SELECT CONF_os_activeUsers FROM $tablename" );
 	$CONF_os_totalGridAccountsos = $wpdb->get_var( "SELECT CONF_os_totalGridAccounts FROM $tablename" );
 	$CONF_os_totalAccountsos = $wpdb->get_var( "SELECT CONF_os_totalAccounts FROM $tablename" );
@@ -49,7 +43,7 @@
 	$CONF_os_totalRegionsos = $wpdb->get_var( "SELECT CONF_os_totalRegions FROM $tablename" );
 	$CONF_os_regionsergebnisos = $wpdb->get_var( "SELECT CONF_os_regionsergebnis FROM $tablename" );
 	  
-$con = mysqli_connect($CONF_db_serveross,$CONF_db_useross,$CONF_db_passoss,$CONF_db_databaseoss);
+$con = mysqli_connect($CONF_db_serversplash,$CONF_db_usersplash,$CONF_db_passsplash,$CONF_db_databasesplash);
 
 // Query the database and get the count
 
@@ -91,9 +85,9 @@ list($groups) = mysqli_fetch_row($resultoss10);
 	load_plugin_textdomain( 'oswp-splash', false, basename( dirname( __FILE__ ) ) . '/lang' );
 
 // Display the results
-echo "<h1>$CONF_os_nameoss</h1>";
+echo "<h1>$CONF_os_namesplash</h1>";
 // Hochstrich bei on angebracht testen ob die Einstellungen noch gehen.
-if ($CONF_os_totalUsersos ==  'on' ){ echo esc_html__( 'Users in the grid : ', 'oswp-splash' ). $totalUsers ."<br>"; }else{	echo ""; }
+if ($CONF_os_totalUserssplash ==  'on' ){ echo esc_html__( 'Users in the grid : ', 'oswp-splash' ). $totalUsers ."<br>"; }else{	echo ""; }
 if ($CONF_os_activeUsersos ==  'on' ){ echo esc_html__( 'Active in the last 30 days : ', 'oswp-splash' ). $activeUsers ."<br>"; }else{	echo ""; } 
 if ($CONF_os_totalGridAccountsos ==  'on' ){ echo esc_html__( 'Hypergrid users : ', 'oswp-splash' ). $totalGridAccounts ."<br>"; }else{	echo ""; } 
 if ($CONF_os_totalAccountsos ==  'on' ){ echo esc_html__( 'Registrations : ', 'oswp-splash' ). $totalAccounts ."<br>"; }else{	echo ""; } 
@@ -106,8 +100,8 @@ if ($CONF_os_totalRegionsos ==  'on' ){ echo esc_html__( 'Total regions : ', 'os
 if ($CONF_os_regionsergebnisos ==  'on' ){ echo esc_html__( 'Regions in m² : ', 'oswp-splash' ). $regionsergebnis ."<br>"; }else{	echo ""; } 
 
 // Online? Offline?
-$check = mysqli_query($con,"SELECT * FROM regions LIMIT 0,1" );
-	if ($check){
+//$check = mysqli_query($con,"SELECT * FROM regions LIMIT 0,1" );
+	if ($regionsergebnis > 1){
 	// Keine Region vorhanden.
 		echo "<h1><font color=#00AA00>".esc_html__( 'Grid is ONLINE', 'oswp-splash' )."</font></h1></b><br>";
 	}else{

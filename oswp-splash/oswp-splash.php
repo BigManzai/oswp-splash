@@ -12,16 +12,16 @@
  *
  * @wordpress-plugin
  * Plugin Name:       oswp-splash
- * Plugin URI:        https://github.com/BigManzai/oswp-splash
+ * Plugin URI:        https://github.com/BigManzai/oswp/tree/master/oswp-splash
  * Description:       Splash Show information about the OpenSimulator. Please activate in the widget area and enter the MySQL data. You can create an extra page in WordPress and name this splash. Then enter this link to the Splash page in the Grid.ini under welcome = your-splash-site.com.
- * Version:           1.2.0
+ * Version:           1.2.3
  * Author:            Manfred Aabye
  * Author URI:        http://openmanniland.de
  * Text Domain:       oswp-splash
  * License:           GPL-2
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Domain Path:       /lang
- * GitHub Plugin URI: https://github.com/BigManzai/oswp
+ * GitHub Plugin URI: https://github.com/BigManzai/oswp/tree/master/oswp-splash
  */
  
  // Prevent direct file access
@@ -32,25 +32,11 @@ if ( ! defined ( 'ABSPATH' ) ) {
 /**
  * Gettext.
  */
-load_plugin_textdomain( 'oswp-regionsliste', false, basename( dirname( __FILE__ ) ) . '/lang' );
+load_plugin_textdomain( 'oswp-splash', false, basename( dirname( __FILE__ ) ) . '/lang' );
 
 // TODO: change 'oswp_splash' to the name of your plugin
 class oswp_splash extends WP_Widget {
 
-    /**
-     * @TODO - Rename "oswp-splash" to the name your your widget
-     *
-     * Unique identifier for your widget.
-     *
-     *
-     * The variable name is used as the text domain when internationalizing strings
-     * of text. Its value should match the Text Domain file header in the main
-     * widget file.
-     *
-     * @since    1.1.1
-     *
-     * @var      string
-     */
     protected $widget_slug = 'oswp-splash';
 
 	/*--------------------------------------------------*/
@@ -80,14 +66,6 @@ class oswp_splash extends WP_Widget {
 			)
 		);
 
-		// Register admin styles and scripts
-		//add_action( 'admin_print_styles', array( $this, 'register_admin_styles' ) );
-		//add_action( 'admin_enqueue_scripts', array( $this, 'register_admin_scripts' ) );
-
-		// Register site styles and scripts
-		//add_action( 'wp_enqueue_scripts', array( $this, 'register_widget_styles' ) );
-		//add_action( 'wp_enqueue_scripts', array( $this, 'register_widget_scripts' ) );
-
 		// Refreshing the widget's cached output with each new post
 		add_action( 'save_post',    array( $this, 'flush_widget_cache' ) );
 		add_action( 'deleted_post', array( $this, 'flush_widget_cache' ) );
@@ -96,27 +74,11 @@ class oswp_splash extends WP_Widget {
 	} // end constructor
 
 
-    /**
-     * Return the widget slug.
-     *
-     * @since    1.1.1
-     *
-     * @return    Plugin slug variable.
-     */
     public function get_widget_slug() {
         return $this->widget_slug;
     }
 
-	/*--------------------------------------------------*/
-	/* Widget API Functions
-	/*--------------------------------------------------*/
 
-	/**
-	 * Outputs the content of the widget.
-	 *
-	 * @param array args  The array of form elements
-	 * @param array instance The current instance of the widget
-	 */
 	public function widget( $args, $instance ) {
 
 		
@@ -158,12 +120,7 @@ class oswp_splash extends WP_Widget {
 	{
     	wp_cache_delete( $this->get_widget_slug(), 'widget' );
 	}
-	/**
-	 * Processes the widget's options to be saved.
-	 *
-	 * @param array new_instance The new instance of values to be generated via the update.
-	 * @param array old_instance The previous instance of values before the update.
-	 */
+
 	public function update( $new_instance, $old_instance ) {
 
 		$instance = $old_instance;
@@ -174,46 +131,22 @@ class oswp_splash extends WP_Widget {
 
 	} // end widget
 
-	/**
-	 * Generates the administration form for the widget.
-	 *
-	 * @param array instance The array of keys and values for the widget.
-	 *
-	 * Erzeugt das Administrationsformular für das Widget.
-	 *
-	 * @param array instance Das Array mit Schlüsseln und Werten für das Widget.
-	 */
 	public function form( $instance ) {
 
 		// TODO: Define default values for your variables
 		$instance = wp_parse_args(
 			(array) $instance
 		);
-
-		// TODO: Store the values of the widget in their own variable
-		// TODO: Speichern Sie die Werte des Widgets in ihrer eigenen Variablen
-		
-	
-/* 		register_setting( 'oswp-widget-settings-group', 'oswptitle' );
-		register_setting( 'oswp-widget-settings-group', 'oswpbaseurl' );
-		register_setting( 'oswp-widget-settings-group', 'oswpport' );
-		register_setting( 'oswp-widget-settings-group', 'oswprefresh' ); */
-
-		
-
 		// Display the admin form
-		// Das Admin-Formular anzeigen
-		include( plugin_dir_path(__FILE__) . 'views/splash-admin.php' );
-
+		// Schauen ob der Benutzer Admin Rechte hat.
+		if (current_user_can('edit_plugins')) {
+			// Erst jetzt kann die Datei splash-admin.php aufgerufen werden.
+			include( plugin_dir_path(__FILE__) . 'views/splash-admin.php' );
+		}
+		
 	} // end form
 
-	/*--------------------------------------------------*/
-	/* Public Functions
-	/*--------------------------------------------------*/
 
-	/**
-	 * Loads the Widget's text domain for localization and translation.
-	 */
 	public function widget_textdomain() {
 
 		// TODO be sure to change 'oswp-splash' to the name of *your* plugin
@@ -221,39 +154,18 @@ class oswp_splash extends WP_Widget {
 
 	} // end widget_textdomain
 
-	/**
-	 * Fired when the plugin is activated.
-	 *
-	 * @param  boolean $network_wide True if WPMU superadmin uses "Network Activate" action, false if WPMU is disabled or plugin is activated on an individual blog.
-	 */
+
 	public function activate( $network_wide ) {
 		// TODO define activation functionality here
 	} // end activate
 
-	/**
-	 * Fired when the plugin is deactivated.
-	 *
-	 * @param boolean $network_wide True if WPMU superadmin uses "Network Activate" action, false if WPMU is disabled or plugin is activated on an individual blog
-	 */
+
 	public function deactivate( $network_wide ) {
 		// TODO define deactivation functionality here
 	} // end deactivate
 
-	/**
-	 * Registers and enqueues widget-specific scripts.
-	 */
-	public function register_widget_scripts() {
-
-		wp_enqueue_script( $this->get_widget_slug().'-script', plugins_url( 'js/widget.js', __FILE__ ), array('jquery') );
-
-	} // end register_widget_scripts
-	
-
-
 } // end class
 
-// TODO: Remember to change 'oswp_splash' to match the class name definition
-//add_action( 'widgets_init', create_function( '', 'register_widget("oswp_splash");' ) );
 
 function oswp_splash_register_widget() {
 register_widget('oswp_splash');

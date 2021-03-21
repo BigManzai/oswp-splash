@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: oswp-splash\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-08 09:26+0000\n"
+"POT-Creation-Date: 2019-08-01 08:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -15,104 +15,112 @@ msgstr ""
 "X-Generator: Loco https://localise.biz/\n"
 "X-Loco-Version: 2.3.0; wp-5.2.1"
 
-#: views/splash-admin.php:25
-msgid "Users in the grid"
-msgstr ""
-
-#: views/splash-admin.php:30
-msgid "Active in the last 30 days"
-msgstr ""
-
-#: views/splash-admin.php:35
-msgid "Hypergrid users"
-msgstr ""
-
-#: views/splash-admin.php:40
-msgid "Registrations"
-msgstr ""
-
-#: views/splash-admin.php:45
-msgid "Active friendships"
-msgstr ""
-
-#: views/splash-admin.php:50
-msgid "Active groups"
-msgstr ""
-
-#: views/splash-admin.php:55
-msgid "Normal regions"
-msgstr ""
-
-#: views/splash-admin.php:60
-msgid "Var regions"
-msgstr ""
-
-#: views/splash-admin.php:65
-msgid "Total regions"
-msgstr ""
-
-#: views/splash-admin.php:70
-msgid "Regions in m²"
-msgstr ""
-
-#: views/splash-admin.php:78
-msgid "  Grid Name or Headline:"
-msgstr ""
-
-#: views/splash-admin.php:85
-msgid "  MySQL Server IP:"
-msgstr ""
-
-#: views/splash-admin.php:92
-msgid "  MySQL Database:"
-msgstr ""
-
-#: views/splash-admin.php:99
-msgid "  MySQL User:"
-msgstr ""
-
-#: views/splash-admin.php:106
-msgid "  Password:"
-msgstr ""
-
-#: views/splash-widget.php:68
+#: views/splash-widget.php:90
 msgid "Users in the grid : "
 msgstr ""
 
-#: views/splash-widget.php:69
+#: views/splash-widget.php:91
 msgid "Active in the last 30 days : "
 msgstr ""
 
-#: views/splash-widget.php:70
+#: views/splash-widget.php:92
 msgid "Hypergrid users : "
 msgstr ""
 
-#: views/splash-widget.php:71
+#: views/splash-widget.php:93
 msgid "Registrations : "
 msgstr ""
 
-#: views/splash-widget.php:72
+#: views/splash-widget.php:94
 msgid "Active friendships : "
 msgstr ""
 
-#: views/splash-widget.php:73
+#: views/splash-widget.php:96
 msgid "Active groups : "
 msgstr ""
 
-#: views/splash-widget.php:74
+#: views/splash-widget.php:97
 msgid "Normal regions : "
 msgstr ""
 
-#: views/splash-widget.php:75
+#: views/splash-widget.php:98
 msgid "Var regions : "
 msgstr ""
 
-#: views/splash-widget.php:76
+#: views/splash-widget.php:99
 msgid "Total regions : "
 msgstr ""
 
-#: views/splash-widget.php:77
+#: views/splash-widget.php:100
 msgid "Regions in m² : "
+msgstr ""
+
+#: views/splash-widget.php:106
+msgid "Grid is ONLINE"
+msgstr ""
+
+#: views/splash-widget.php:109
+msgid "Grid is OFFLINE"
+msgstr ""
+
+#: views/splash-admin.php:27
+msgid "Users in the grid"
+msgstr ""
+
+#: views/splash-admin.php:32
+msgid "Active in the last 30 days"
+msgstr ""
+
+#: views/splash-admin.php:37
+msgid "Hypergrid users"
+msgstr ""
+
+#: views/splash-admin.php:42
+msgid "Registrations"
+msgstr ""
+
+#: views/splash-admin.php:47
+msgid "Active friendships"
+msgstr ""
+
+#: views/splash-admin.php:52
+msgid "Active groups"
+msgstr ""
+
+#: views/splash-admin.php:57
+msgid "Normal regions"
+msgstr ""
+
+#: views/splash-admin.php:62
+msgid "Var regions"
+msgstr ""
+
+#: views/splash-admin.php:67
+msgid "Total regions"
+msgstr ""
+
+#: views/splash-admin.php:72
+msgid "Regions in m²"
+msgstr ""
+
+#: views/splash-admin.php:80
+msgid "  Grid Name or Headline:"
+msgstr ""
+
+#: views/splash-admin.php:87
+msgid "  MySQL Server IP:"
+msgstr ""
+
+#: views/splash-admin.php:94
+msgid "  MySQL Database:"
+msgstr ""
+
+#: views/splash-admin.php:101
+msgid "  MySQL User:"
+msgstr ""
+
+#: views/splash-admin.php:108
+msgid "  Password:"
 msgstr ""
 
 #. Name of the plugin
@@ -128,7 +136,7 @@ msgid ""
 msgstr ""
 
 #. URI of the plugin
-msgid "https://github.com/BigManzai/oswp"
+msgid "https://github.com/BigManzai/oswp-splash"
 msgstr ""
 
 #. Author of the plugin
